@@ -1,179 +1,165 @@
-# 🔐 Assessment 1: User Management API
+# User Management API
 
-Welcome to the User Management API assessment! This project contains a Node.js API with intentional bugs and missing features that you need to fix and implement.
+## Overview
 
-## 🎯 Objective
+The User Management API is a secure RESTful backend service built using Node.js and Express. It provides authentication, user management, administrative controls, and a puzzle-based secret endpoint. The project focuses on implementing secure authentication, input validation, role-based access control, and best backend development practices.
 
-Your goal is to:
-1. **Fix all bugs** in the existing code
-2. **Implement missing features** 
-3. **Solve the puzzles** hidden throughout the application
-4. **Improve security** and best practices
+---
 
-## 🚀 Getting Started
+## Live Deployment
+
+Production API:
+https://medable-usermanagement.onrender.com
+
+Swagger Documentation:
+https://medable-usermanagement.onrender.com/api-docs
+
+---
+
+## Features
+
+- JWT-based authentication  
+- Secure password hashing using bcrypt  
+- User registration with validation  
+- Role-based authorization (admin and user roles)  
+- User update and deletion controls  
+- Self-deletion prevention  
+- Pagination support for user listing  
+- Rate limiting for security  
+- Puzzle-based secret endpoint with multiple access methods  
+- Swagger documentation for API testing  
+
+---
+
+## Tech Stack
+
+- Node.js  
+- Express.js  
+- JSON Web Tokens (JWT)  
+- bcrypt.js  
+- Validator.js  
+- Swagger (swagger-ui-express, swagger-jsdoc)  
+- Express Rate Limit  
+- Render (Deployment)  
+
+---
+
+## Local Setup Instructions
 
 ### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
-- Netlify CLI (for local development)
 
-### Installation
+- Node.js version 18 or higher  
+- npm  
 
-```bash
+---
+
+### Clone Repository
+
+git clone https://github.com/Vikranth2024/Medable-UserManagement.git
+cd Medable-UserManagement
+
+
+---
+
+### Install Dependencies
+
 npm install
+
+
+---
+
+### Configure Environment Variables
+
+Create a `.env` file in the project root.
+
+JWT_SECRET=your_secure_jwt_secret
+SECRET_HEADER_VALUE=find_me_if_you_can_2024
+PORT=8888
+
+
+---
+
+### Run Application
+
+Development Mode:
+
 npm run dev
-```
 
-The API will be available at `http://localhost:8888`
 
-## 📚 API Documentation
+Production Mode:
 
-### Authentication Endpoints
+npm start
 
-#### POST /api/auth/login
-Login with email and password
-```json
-{
-  "email": "admin@test.com",
-  "password": "admin123"
-}
-```
 
-#### POST /api/auth/register  
-Register a new user
-```json
-{
-  "email": "newuser@test.com",
-  "password": "securepassword123",
-  "name": "New User"
-}
-```
+---
 
-### User Management Endpoints
+### Access Application
 
-#### GET /api/users
-Get all users (requires authentication)
+Local API: http://localhost:8888
 
-#### GET /api/users/:id
-Get user by ID (requires authentication)
 
-#### PUT /api/users/:id
-Update user information (requires authentication)
+Swagger Documentation: http://localhost:8888/api-docs
 
-#### DELETE /api/users/:id
-Delete user (requires admin role)
 
-## 🐛 Bugs to Fix
+---
 
-### Critical Security Issues
-1. **Hardcoded JWT Secret** - The JWT secret is hardcoded in multiple files
-2. **Password Exposure** - User passwords are being returned in API responses
-3. **Missing Authentication** - Many endpoints lack proper authentication
-4. **No Input Validation** - Missing validation for email format, password strength
-5. **Async/Await Bug** - bcrypt.compare is not being awaited properly
-6. **No Rate Limiting** - API endpoints are vulnerable to brute force attacks
+## API Endpoints
 
-### Functionality Bugs
-7. **Duplicate User Data** - User array is duplicated across files instead of being centralized
-8. **Missing Error Handling** - Inadequate error handling for JSON parsing and other operations
-9. **No Role-Based Access** - Admin-only operations aren't properly protected
-10. **Self-Deletion Prevention** - Users can delete their own accounts without restrictions
+Authentication:
 
-## ⚡ Features to Implement
+- POST /api/auth/login  
+- POST /api/auth/register  
 
-### Must-Have Features
-1. **JWT Authentication Middleware** - Create proper auth middleware for protected routes
-2. **Input Validation** - Implement comprehensive validation for all inputs
-3. **Password Hashing for Updates** - Ensure password updates are properly hashed
-4. **User Profile Endpoint** - Add GET /api/auth/profile to get current user info
-5. **Password Change Endpoint** - Add POST /api/auth/change-password
-6. **Admin User Statistics** - Add GET /api/admin/stats (admin only)
+User Management:
 
-### Nice-to-Have Features  
-7. **Pagination** - Add pagination to GET /api/users
-8. **User Search** - Add search functionality to find users
-9. **Account Activation** - Email-based account activation flow
-10. **Password Reset** - Password reset functionality with secure tokens
+- GET /api/users  
+- GET /api/users/:id  
+- PUT /api/users/:id  
+- DELETE /api/users/:id (Admin only)  
 
-## 🧩 Puzzles & Hidden Challenges
+Puzzle Endpoint:
 
-### Puzzle 1: Secret Headers
-Find the secret header set in the network configuration. What value is it set to?
+- GET /api/users/secret-stats  
 
-### Puzzle 2: Hidden Endpoint
-There's a secret endpoint mentioned in the API responses. Can you find and access it?
+---
 
-### Puzzle 3: Encoded Message
-Once you find the secret endpoint, decode the hidden message. What does it say?
+## Security Highlights
 
-### Puzzle 4: Access Methods
-The secret endpoint has multiple ways to access it. Can you find both methods?
+- All protected routes require JWT authentication  
+- Passwords are securely hashed  
+- Input validation prevents invalid or weak credentials  
+- Role-based authorization protects administrative actions  
+- Rate limiting protects against brute force attacks  
+- Sensitive data is never exposed in API responses  
 
-## 🔧 Testing Your Solutions
+---
 
-### Manual Testing Commands
+## Puzzle Challenge
 
-```bash
-# Test login
-curl -X POST http://localhost:8888/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"admin@test.com","password":"admin123"}'
+Secret Header Value: find_me_if_you_can_2024
 
-# Test user creation
-curl -X POST http://localhost:8888/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"testpass123","name":"Test User"}'
+Hidden Endpoint: /api/users/secret-stats
 
-# Test getting users (should require auth)
-curl http://localhost:8888/api/users
+Decoded Secret Message: Congratulations! You found the secret endpoint. The final clue is: SHC_Header_Puzzle_2024
 
-# Test the secret endpoint (find the right way to access it!)
-curl http://localhost:8888/api/users/secret-stats
-```
 
-### Expected Behavior After Fixes
+Access Methods:
 
-1. **Secure Authentication** - JWT tokens should be properly validated
-2. **No Sensitive Data Leaks** - Passwords should never be returned
-3. **Proper Validation** - Invalid emails/weak passwords should be rejected
-4. **Role-Based Security** - Only admins can access admin endpoints
-5. **Centralized Data** - Single source of truth for user data
+- Secret header  
+- Query parameter  
+- JWT token  
 
-## 📝 Submission Guidelines
+---
 
-### What to Submit
+## Deployment
 
-1. **Fixed Code** - All bugs resolved and features implemented
-2. **Documentation** - Update this README with any new endpoints or changes
-3. **Test Report** - Document how you tested your solutions
-4. **Puzzle Solutions** - List all the puzzles you solved and their answers
+The application is deployed using Render and configured using environment variables.
 
-### Code Quality Requirements
+---
 
-- **ES6+ Features** - Use modern JavaScript features
-- **Error Handling** - Comprehensive error handling throughout
-- **Security Best Practices** - Implement proper security measures
-- **Clean Code** - Well-commented, readable code
-- **No Console Logs** - Remove all debug console.log statements
+## Author
 
-## 🎉 Bonus Points
+Vikranth S  
+https://github.com/Vikranth2024
 
-- **Input Sanitization** - Prevent XSS and injection attacks
-- **API Documentation** - Generate Swagger/OpenAPI documentation  
-- **Unit Tests** - Write tests for your functions
-- **Environment Variables** - Use proper environment configuration
-- **Logging System** - Implement proper application logging
 
-## 🚨 Common Pitfalls
-
-1. Don't just comment out bugs - fix them properly
-2. Ensure your authentication middleware works with all protected routes
-3. Remember to hash passwords when updating user profiles
-4. Test edge cases (empty inputs, invalid tokens, etc.)
-5. Make sure the secret endpoint puzzles still work after your fixes
-
-## 📞 Support
-
-If you get stuck on any puzzle or need clarification on requirements, document your questions and the approaches you tried. This shows your problem-solving process.
-
-Good luck! 🍀
