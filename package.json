@@ -1,0 +1,34 @@
+{
+  "name": "assessment-1-user-management",
+  "version": "1.0.0",
+  "description": "User Management API Assessment - Fix bugs and implement missing features",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^4.22.1",
+    "express-rate-limit": "^8.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "uuid": "^9.0.1",
+    "validator": "^13.15.26"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  },
+  "keywords": [
+    "assessment",
+    "api",
+    "node.js",
+    "user-management"
+  ],
+  "author": "Assessment Creator",
+  "license": "MIT"
+}
